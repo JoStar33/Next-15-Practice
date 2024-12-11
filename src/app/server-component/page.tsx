@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import Test from '@/components/serverComponent/Test';
 
 export default function ServerComponentPage() {
@@ -6,6 +7,7 @@ export default function ServerComponentPage() {
     <>
       여긴 서버에서 렌더링 되는 영역입니다.
       <div className="flex text-orange-500">하이?</div>
+      <Link href="/search">검색페이지 이동</Link>
       <Test />
     </>
   );
@@ -37,4 +39,10 @@ export default function ServerComponentPage() {
  * 4. 서버 컴포넌트에서 클라이언트 컴포넌트에게 직렬화 되지 않는 props는 전달 불가능하다.
  *  - 이건 이미 알겠지만, JSON형태로 만들어줘야 한다는거임.
  *  - 함수는 직렬화가 불가능하기 때문에 props로 전달이 불가능하다. 주의할것.
+ */
+
+/**
+ * RSC페이로드란?
+ * 직렬화된 텍스트로 서버컴포넌트의 정보를 전달하는 페이로드이다.
+ * 참고로 RSC 페이로드는 캐싱됨.
  */
