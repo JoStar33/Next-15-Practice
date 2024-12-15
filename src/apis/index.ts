@@ -8,6 +8,7 @@ const config: AxiosRequestConfig = {
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
+// 주의! axios 사용을 하게되면 Next.js fetch의 캐싱기능을 사용못함.
 export const instance = axios.create(config);
 
 export const requests = {
