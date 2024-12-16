@@ -10,12 +10,8 @@ import React from 'react';
 export default function SearchBar() {
   // next app 라우터에서는 searchParams를 가져올때 비동기적으로 가져온다.
   const searchParams = useSearchParams();
-  const [searchState, setSearchState] = React.useState('');
   const search = searchParams.get('search');
-
-  React.useEffect(() => {
-    setSearchState(search ?? '');
-  }, [search]);
+  const [searchState, setSearchState] = React.useState(() => search || '');
 
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchState(event.currentTarget.value);
