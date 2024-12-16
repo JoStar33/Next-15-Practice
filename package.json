@@ -7,13 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ]
+    "prepare": "husky",
+    "commit": "./node_modules/cz-customizable/standalone.js"
   },
   "dependencies": {
     "axios": "^1.7.9",
@@ -27,6 +22,7 @@
     "@types/react-dom": "^19",
     "@typescript-eslint/eslint-plugin": "^8.17.0",
     "@typescript-eslint/parser": "^8.17.0",
+    "cz-customizable": "^7.3.0",
     "eslint": "^8",
     "eslint-config-next": "15.0.4",
     "eslint-config-prettier": "^9.1.0",
@@ -40,5 +36,16 @@
     "prettier-plugin-tailwindcss": "^0.6.9",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "config": {
+    "cz-customizable": {
+      "config": "cz-config.js"
+    }
   }
 }
