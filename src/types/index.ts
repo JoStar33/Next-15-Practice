@@ -3,3 +3,5 @@ export interface DefaultResponse {
   detail: string | null;
   message: string;
 }
+
+export type GenderType = 'FEMALE' | 'MALE';

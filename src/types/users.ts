@@ -1,4 +1,7 @@
 /*************************** Domain & DTO ***************************/
+
+import { GenderType } from '.';
+
 /**사용자 아이템 */
 export interface UserListItem {
   /**유저 ID */
@@ -16,6 +19,12 @@ export interface UserListItem {
   district: string;
 }
 /******************************* Form ********************************/
+
+export interface UserForm {
+  name: string;
+  age: number;
+  gender: GenderType;
+}
 
 /***************************** Request *****************************/
 
