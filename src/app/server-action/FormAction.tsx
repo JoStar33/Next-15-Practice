@@ -18,8 +18,16 @@ export default function FormAction() {
     resolver: yupResolver(schema.userSchema),
   });
 
-  const handleActionSubmit: SubmitHandler<UserForm> = async (submitData) => {
-    await submitForm(submitData);
+  const [state, formActon, isPending] = React.useActionState(submitForm, null);
+
+  const handleActionSubmit: SubmitHandler<UserForm> = (submitData) => {
+    React.startTransition(() => {
+      formActon(submitData);
+      if (!state || !state.status) {
+        alert(state?.error);
+        return;
+      }
+    });
   };
 
   /**
@@ -31,20 +39,27 @@ export default function FormAction() {
    * 아니면 아예 서버액션 함수에서 DB접근을 해도 괜찮고.
    */
   return (
-    <FormProvider {...methods}>
-      <form className="flex flex-col gap-[10px]" onSubmit={methods.handleSubmit(handleActionSubmit)}>
-        <Form.Input<UserForm> name="name" />
-        <Form.Input<UserForm> name="age" />
-        <div className="flex gap-[5px]">
-          <Form.RadioButton<UserForm> name="gender" value="MALE">
-            남
-          </Form.RadioButton>
-          <Form.RadioButton<UserForm> name="gender" value="FEMALE">
-            여
-          </Form.RadioButton>
+    <>
+      {isPending && (
+        <div className="fixed left-0 top-0 flex size-full items-center justify-center bg-black text-[25px] font-semibold text-white opacity-50">
+          로딩중...
         </div>
-        <button type="submit">등록</button>
-      </form>
-    </FormProvider>
+      )}
+      <FormProvider {...methods}>
+        <form className="flex flex-col gap-[10px]" onSubmit={methods.handleSubmit(handleActionSubmit)}>
+          <Form.Input<UserForm> name="name" />
+          <Form.Input<UserForm> name="age" />
+          <div className="flex gap-[5px]">
+            <Form.RadioButton<UserForm> name="gender" value="MALE">
+              남
+            </Form.RadioButton>
+            <Form.RadioButton<UserForm> name="gender" value="FEMALE">
+              여
+            </Form.RadioButton>
+          </div>
+          <button type="submit">등록</button>
+        </form>
+      </FormProvider>
+    </>
   );
 }

@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-expressions
 'use server';
 
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { UserForm } from '@/types/users';
 import { schema } from '@/utils/schema';
 
@@ -14,7 +14,7 @@ import { schema } from '@/utils/schema';
 // 이런 활용을 해볼 수 있겠다. submit을 하는 API를 가리고, API에 전달하는 데이터 자체는 암호화를 안하고
 // 클라이언트에서 암호화된 정보를 서버액션함수에서 복호화하면 될듯?
 
-const submitForm = async (formData: UserForm) => {
+const submitForm = async (_: any, formData: UserForm) => {
   try {
     // 서버측 유효성 검사 실시
     const validation = await schema.userSchema.validate(formData);
@@ -38,18 +38,20 @@ const submitForm = async (formData: UserForm) => {
     revalidatePath('/(NoLayout)', 'layout');
     // 모든 데이터를 재검증한다.
     revalidatePath('/', 'layout');
+    // 이렇게 태그정보를 기반으로 재검증을 하는 방식도 있다. 이렇게 된다면 해당 태그정보를 기반으로 캐싱을 하고있는
+    // 페이지를 재검증한다.
+    const bookId = 12;
+    revalidateTag(`book=${bookId}`);
 
     return {
-      errors: null,
-      code: 200,
+      error: null,
+      status: true,
       data: 'data received and mutated',
     };
   } catch (error: unknown) {
     return {
-      errors: {
-        error,
-        message: 'An unexpected error occurred. Could not create shelf.',
-      },
+      error,
+      status: false,
       data: null,
     };
   }
