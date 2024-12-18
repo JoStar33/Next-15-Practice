@@ -10,6 +10,8 @@ export const routing = defineRouting({
   pathnames: {
     '/': '/',
   },
+  // 이렇게 설정해두면, ko일때에는 경로가 안보이게 된다.
+  localePrefix: 'as-needed',
 });
 
 export type Locale = (typeof routing.locales)[number];

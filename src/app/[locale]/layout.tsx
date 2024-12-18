@@ -8,7 +8,6 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-// 모든 페이지에 다 적용되는 루트페이지 (필수적으로 존재해야함.)
 export default async function LocaleLayout({
   children,
   params,

@@ -18,6 +18,8 @@ export default async function Page({ params }: { params: Promise<{ locale: Lanug
    *
    * 서버에서의 번역실행 >> getTranslations
    * 클라이언트에서의 번역실행 >> useTranslations
+   *
+   * https://next-intl.dev/docs/environments/server-client-components
    */
   return <>{t('Home.title')}</>;
 }
