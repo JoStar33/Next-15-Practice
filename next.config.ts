@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
       fullUrl: true,
     },
   },
+  // 아래 옵션은 Next.js 15.1버전부터 사용가능한 기능.
+  // 403 or 401페이지에 대한 처리를 가능케함.
+  experimental: {
+    authInterrupts: true,
+  },
 };
 
 export default withNextIntl(nextConfig);
