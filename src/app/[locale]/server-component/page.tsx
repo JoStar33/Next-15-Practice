@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Test from '@/components/serverComponent/Test';
+import ServerTest from '@/components/serverComponent/ServerTest';
 
 export default function ServerComponentPage() {
   return (
@@ -8,7 +9,8 @@ export default function ServerComponentPage() {
       여긴 서버에서 렌더링 되는 영역입니다.
       <div className="flex text-orange-500">하이?</div>
       <Link href="/search">검색페이지 이동</Link>
-      <Test />
+      <Test what="뭐요" />
+      <ServerTest />
     </>
   );
 }
