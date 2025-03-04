@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Test from '@/components/serverComponent/Test';
 import ServerTest from '@/components/serverComponent/ServerTest';
+import ServerWrapper from '@/components/serverComponent/ServerWrapper';
 
 export default function ServerComponentPage() {
   return (
@@ -10,7 +11,9 @@ export default function ServerComponentPage() {
       <div className="flex text-orange-500">하이?</div>
       <Link href="/search">검색페이지 이동</Link>
       <Test what="뭐요" />
-      <ServerTest />
+      <ServerWrapper>
+        <ServerTest />
+      </ServerWrapper>
     </>
   );
 }
